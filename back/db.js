@@ -8,18 +8,18 @@ let db = new sqlite3.Database(dbname, err => {
 
      db.serialize(() => {
 
-       // CREATE DATABASE
+       /* // CREATE DATABASE
          db.run(`CREATE TABLE "users" (
             "email"	TEXT NOT NULL UNIQUE,
             "note"	INTEGER NOT NULL,
             PRIMARY KEY("email")
-        )`) 
+        )`)  */
         
         // Select data
-        db.each(`SELECT * FROM users`, (err, data) => {
+       /*  db.each(`SELECT * FROM users`, (err, data) => {
             if (err) { throw err }
             console.log(data);
-        })
+        }) */
     })
 });
 
