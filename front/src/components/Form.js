@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Axios from 'axios'
+import '../App.css';
 
 function Form() {
     const url = "/post/data"
@@ -15,7 +16,6 @@ function Form() {
             note: data.note
         })
             .then(res => {
-                console.log(res.data);
                 window.location.reload(false);
             })
     }
@@ -24,20 +24,25 @@ function Form() {
         const newdata = { ...data }
         newdata[e.target.id] = e.target.value
         setData(newdata)
-        console.log(newdata);
     }
     return (
-        <div>
+        <div className="Form">
             <form onSubmit={(e) => submit(e)}>
-                <label>
-                    Email :
+                <div>
+                    <label>
+                        Email :
           <input onChange={(e) => handle(e)} id="email" value={data.email} type="text" name="email"></input>
-                </label>
-                <label>
-                    Note :
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Note :
           <input onChange={(e) => handle(e)} id="note" value={data.note} type="number" name="note"></input>
-                </label>
-                <button>Submit</button>
+                    </label>
+                </div>
+                <div>
+                    <button>Submit</button>
+                </div>
             </form>
         </div>
     )

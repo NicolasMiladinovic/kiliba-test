@@ -7,12 +7,11 @@ let db = new sqlite3.Database(dbname, err => {
     console.log('Database stated on ' + dbname);
 
      db.serialize(() => {
-
-       /* // CREATE DATABASE
-         db.run(`CREATE TABLE "users" (
-            "email"	TEXT NOT NULL UNIQUE,
-            "note"	INTEGER NOT NULL,
-            PRIMARY KEY("email")
+       // CREATE DATABASE
+       /*    db.run(`CREATE TABLE users (
+            email	TEXT NOT NULL UNIQUE,
+            note	INTEGER NOT NULL,
+            PRIMARY KEY(email)
         )`)  */
         
         // Select data
