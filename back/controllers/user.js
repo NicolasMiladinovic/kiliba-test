@@ -24,8 +24,24 @@ exports.getdata = (req, res, next) => {
         } else {
             console.log("All data selected");
             res.status(201).json(result);
-            /* console.log(result);
-            console.log(result[1].email); */
+            let allEmails = result.map(obj => obj.email);
+            console.log(result);
+            console.log(allEmails);
+            /* res.status(201).json(allEmails) */
+        }
+    });
+};
+
+// Get average of the notes
+exports.getaverage = (req, res, next) => {
+    db.all(`SELECT AVG(note) FROM users`, function (err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(400).json('error');
+        } else {
+            console.log(('Average'));
+            res.status(201).json(result);
+            console.log(result);
         }
     });
 };
