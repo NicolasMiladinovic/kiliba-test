@@ -1,12 +1,14 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form'
+
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-  //Declaration of arrays to stock server datas
+    //Declaration of arrays to stock server datas
     this.state = {
       items: [],
       averages: [],
@@ -14,6 +16,7 @@ class App extends React.Component {
     };
   }
 
+  // Calls apis
   getUsersData() {
     fetch('/post/')
       .then(res => {
@@ -55,11 +58,40 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  /*   postUsersData() {
+      const email = document.getElementById("email").value;
+      const note = document.getElementById("note").value;
+      fetch('/post/data',
+        {
+          email,
+          note
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          }
+        })
+        .then((res) => {
+          if (res.status === 201) {
+            console.log(res);
+          }
+        });
+    }
+   */
+
   componentWillMount() {
     this.getUsersData();
     this.getAvg();
     this.getMed();
   }
+
+  /*   componentDidMount() {
+      const requestOptions = {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ user }),
+      }
+    } */
 
   render() {
     const { items } = this.state;
@@ -69,6 +101,22 @@ class App extends React.Component {
     return (
       <div>
         <header className="App-header"><img src={logo} className="App-logo" alt="logo" /></header>
+
+       {/*  <form onSubmit={this.handleSubmit}>
+          <label>
+            Email :
+          <input type="text" name="email" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <label>
+            Note :
+          <input type="number" name="note" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form> */}
+
+        <div className='App'>
+          <Form/>
+        </div>
 
         <ul>
           {
