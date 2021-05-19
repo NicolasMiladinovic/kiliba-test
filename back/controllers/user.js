@@ -34,27 +34,35 @@ exports.getdata = (req, res, next) => {
 
 // Get average of the notes
 exports.getaverage = (req, res, next) => {
-    db.all(`SELECT AVG(note) FROM users`, function (err, result) {
+    db.all(`SELECT AVG(note) AS avg FROM users`, function (err, result) {
         if (err) {
             console.log(err);
             return res.status(400).json('error');
         } else {
             console.log(('Average'));
             res.status(201).json(result);
-            console.log(result);
+            console.log(result[0].avg);
         }
     });
 };
 
+// Get median (not clean)
 exports.getmedian = (req, res, next) => {
-    db.all(`SELECT AVG(note) FROM (SELECT note FROM users ORDER BY note LIMIT 2 - (SELECT COUNT(*) FROM users) % 2 OFFSET (SELECT (COUNT(*) - 1) / 2 FROM users))`, function (err, result) {
+    db.all(`SELECT AVG(note) AS avg FROM (SELECT note FROM users ORDER BY note LIMIT 2 - (SELECT COUNT(*) FROM users) % 2 OFFSET (SELECT (COUNT(*) - 1) / 2 FROM users))`, function (err, result) {
         if (err) {
             console.log(err);
             return res.status(400).json('error');
         } else {
-            console.log(('Average'));
-            res.status(201).json(result);
-            console.log(result);
+            let noteresult = result[0].avg;
+            db.all(`SELECT users.email FROM users WHERE note = ?`, [noteresult], function (err2, result2) {
+                if (err2) {
+                    console.log(err2);
+                    return res.status(400).json('error');
+                } else {       
+                    res.status(201).json(result2);
+                    console.log('user median: ' + result2[0].email + ' note: ' + result[0].avg);
+                }
+            })
         }
     });
 };

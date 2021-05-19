@@ -21,6 +21,11 @@ let db = new sqlite3.Database(dbname, err => {
             console.log(data);
         }) */
 
+       /*  db.each('SELECT users.email FROM users WHERE note = 20', (err, data) => {
+            if (err) { throw err }
+            console.log(data);
+        })
+ */
     })
 });
 
