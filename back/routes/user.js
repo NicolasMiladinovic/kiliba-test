@@ -7,6 +7,7 @@ const userCtrl = require('../controllers/user');
 router.post('/data', userCtrl.userdata);
 router.get('/', userCtrl.getdata);
 router.get('/avg', userCtrl.getaverage);
+router.get('/med', userCtrl.getmedian);
 
 // Exporting
 module.exports = router;
