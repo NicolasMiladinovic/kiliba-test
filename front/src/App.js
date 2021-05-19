@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+// Import modules
 import Form from './components/Form'
 import Search from './components/SearchFilter'
 
@@ -15,11 +16,8 @@ class App extends React.Component {
     };
   }
 
-  onchange = e => {
-    this.setState({ items: e.target.value });
-  }
 
-  // Calls apis
+  // Calls apis, look at the proxy on package.json
   getUsersData() {
     fetch('/post/')
       .then(res => {
@@ -61,13 +59,14 @@ class App extends React.Component {
         .catch(error => console.log(error));
     } */
 
+  // Called before render
   componentWillMount() {
     this.getUsersData();
     this.getAvg();
     /*  this.getMed(); */
   }
 
-
+  // Render element on the page
   render() {
     const { items } = this.state;
     const { averages } = this.state;
@@ -101,6 +100,10 @@ class App extends React.Component {
 
           </div>
 
+          <div className="App-search">
+            <Search />
+          </div>
+
           <div className="App-calcul">
             <p>
               {
@@ -123,9 +126,6 @@ class App extends React.Component {
             </p>
           </div>
 
-          <div className="App-search">
-            <Search />
-          </div>
         </div>
       </div>
     );

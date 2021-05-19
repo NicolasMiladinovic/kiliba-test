@@ -8,6 +8,7 @@ function Search() {
     const [text, setText] = useState('');
     const [suggestions, setSuggestions] = useState([]);
 
+    // Same issue as componentDidMount(), execute functions
     useEffect(() => {
         const loadUsers = async () => {
             const response = await axios.get('/post/');
@@ -33,6 +34,7 @@ function Search() {
         setText(text);
     }
 
+    // Render elements on Search module
     return (
         <div className="">
             <input type="text" 
