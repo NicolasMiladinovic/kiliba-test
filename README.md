@@ -9,7 +9,7 @@ Technical test for Kiliba
 * Express
 * Sqlite3
 
-**Frontend**
+**Frontend :**
 * React.js
 * Axios
 
