@@ -17,14 +17,6 @@ Technical test for Kiliba
 ***
 Capacity test : Creation of APIs Rest, Insert datas from front, Display datas, Search filter emails, Average and Median of datas from database ...
 
-## 🚀 Preparing the database
-***
-
-Database Sqlite3
-* On the *db.js* file uncomment line 10
-* Go to the folder *back* then execute `node db.js`
-* Comment line 10 again  
-Your database is ready
 
 ## 🤖 Launching the backend server
 ***
