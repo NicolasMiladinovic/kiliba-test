@@ -7,7 +7,7 @@ function Form() {
     const url = "/post/data"
     const [data, setData] = useState({
         email: "",
-        note: ""
+        note: "",
     })
 
     function submit(e) {
@@ -29,6 +29,7 @@ function Form() {
         newdata[e.target.id] = e.target.value
         setData(newdata)
     }
+
     // Render elements on From module
     // onChange detects when the value of an input change then handle it
     return (
@@ -37,13 +38,27 @@ function Form() {
                 <div>
                     <label>
                         Email :
-          <input onChange={(e) => handle(e)} id="email" value={data.email} type="text" name="email"></input>
+                         <input
+                            onChange={(e) => handle(e)}
+                            id="email"
+                            value={data.email}
+                            type="text"
+                            name="email"
+                            >
+                        </input>
                     </label>
                 </div>
                 <div>
                     <label>
                         Note :
-          <input onChange={(e) => handle(e)} id="note" value={data.note} type="number" name="note"></input>
+                        <input
+                            onChange={(e) => handle(e)}
+                            id="note"
+                            value={data.note}
+                            type="number"
+                            name="note"
+                            >
+                        </input>
                     </label>
                 </div>
                 <div>

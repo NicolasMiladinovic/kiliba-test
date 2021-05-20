@@ -102,7 +102,7 @@ class App extends React.Component {
           </div>
 
           <div className="App-search">
-            <h3>Cherchez une e-mail</h3>
+            <h3>Cherchez un e-mail</h3>
             <Search />
           </div>
 
@@ -118,7 +118,7 @@ class App extends React.Component {
               <p key={median.id}>
                 <p>Utilisateur médian: <span className="Data">{median.email}</span> Note médiane: <span className="Data">{median.note}</span> </p>
               </p>
-            )) : <p className="Data">La médiane ne correspond à une e-mail (nombre paire d'e-mail)</p>}
+            )) : <p className="Data">La médiane ne correspond pas à un e-mail (nombre paire d'e-mail)</p>}
           </div>
 
         </div>
