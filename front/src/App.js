@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
 
-  /*   getMed() {
+    getMed() {
       fetch('/post/med')
         .then(res => {
           return res.json()
@@ -57,13 +57,13 @@ class App extends React.Component {
           console.log(result)
         })
         .catch(error => console.log(error));
-    } */
+    }
 
   // Called before render
   componentWillMount() {
     this.getUsersData();
     this.getAvg();
-    /*  this.getMed(); */
+     this.getMed();
   }
 
   // Render element on the page

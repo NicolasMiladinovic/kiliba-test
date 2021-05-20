@@ -47,7 +47,7 @@ exports.getaverage = (req, res, next) => {
 };
 
 // Get median (not clean) crash server when the number of notes is even
-/* exports.getmedian = (req, res, next) => {
+exports.getmedian = (req, res, next) => {
     db.all(`SELECT AVG(note) AS avg FROM (SELECT note FROM users ORDER BY note LIMIT 2 - (SELECT COUNT(*) FROM users) % 2 OFFSET (SELECT (COUNT(*) - 1) / 2 FROM users))`, function (err, result) {
         if (err) {
             console.log(err);
@@ -60,9 +60,9 @@ exports.getaverage = (req, res, next) => {
                     return res.status(400).json('error');
                 } else {       
                     res.status(201).json(result2);
-                    console.log('user median: ' + result2[0].email + ' note: ' + result[0].avg);
+                    /* console.log('user median: ' + result2[0].email + ' note: ' + result[0].avg); */
                 }
             })
         }
     });
-}; */
+};
