@@ -22,12 +22,8 @@ exports.getdata = (req, res, next) => {
             console.log(err);
             return res.status(400).json("error");
         } else {
-            console.log("All data selected");
-            res.status(201).json(result);
-            let allEmails = result.map(obj => obj.email);
             console.log(result);
-            console.log(allEmails);
-            /* res.status(201).json(allEmails) */
+            res.status(201).json(result);
         }
     });
 };
@@ -39,14 +35,17 @@ exports.getaverage = (req, res, next) => {
             console.log(err);
             return res.status(400).json('error');
         } else {
-            console.log(('Average'));
-            res.status(201).json(result);
-            console.log(result[0].avg);
+            if (result[0].avg === null) {
+                result[0].avg === '';
+            }else{
+                res.status(201).json(result);
+            }
+            
         }
     });
 };
 
-// Get median (not clean) crash server when the number of notes is even
+// Get median (not clean) no result when the number of notes is even
 exports.getmedian = (req, res, next) => {
     db.all(`SELECT AVG(note) AS avg FROM (SELECT note FROM users ORDER BY note LIMIT 2 - (SELECT COUNT(*) FROM users) % 2 OFFSET (SELECT (COUNT(*) - 1) / 2 FROM users))`, function (err, result) {
         if (err) {
@@ -54,13 +53,13 @@ exports.getmedian = (req, res, next) => {
             return res.status(400).json('error');
         } else {
             let noteresult = result[0].avg;
-            db.all(`SELECT users.email FROM users WHERE note = ?`, [noteresult], function (err2, result2) {
+            db.all(`SELECT * FROM users WHERE note = ?`, [noteresult], function (err2, result2) {
                 if (err2) {
                     console.log(err2);
-                    return res.status(400).json('error');
-                } else {       
+                    return res.status(400).json({ err2: 'No user found' });
+                } else {
                     res.status(201).json(result2);
-                    /* console.log('user median: ' + result2[0].email + ' note: ' + result[0].avg); */
+                    console.log(result2);
                 }
             })
         }

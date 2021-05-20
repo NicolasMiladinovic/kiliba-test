@@ -27,6 +27,7 @@ class App extends React.Component {
         this.setState({
           items: result
         });
+        console.log(result);
       })
       .catch(error => console.log(error));
   }
@@ -40,30 +41,31 @@ class App extends React.Component {
         this.setState({
           averages: result
         });
+        console.log(result);
       })
       .catch(error => console.log(error));
   }
 
 
-    getMed() {
-      fetch('/post/med')
-        .then(res => {
-          return res.json()
-        })
-        .then(result => {
-          this.setState({
-            medians: result
-          });
-          console.log(result)
-        })
-        .catch(error => console.log(error));
-    }
+  getMed() {
+    fetch('/post/med')
+      .then(res => {
+        return res.json()
+      })
+      .then(result => {
+        this.setState({
+          medians: result
+        });
+        console.log(result)
+      })
+      .catch(error => console.log(error));
+  }
 
   // Called before render
   componentWillMount() {
     this.getUsersData();
     this.getAvg();
-     this.getMed();
+    this.getMed();
   }
 
   // Render element on the page
@@ -80,50 +82,43 @@ class App extends React.Component {
 
         <div className="App-body">
 
+
           <div className="App-form-data">
 
             <div className="App-form">
+              <h3>Remplissez le formulaire </h3>
               <Form />
             </div>
 
             <div className="App-data">
-              <ul>
-                {
-                  items.map(item => (
-                    <p key={item.id}>
-                      <p>email: <span className="Data">{item.email}</span> note: <span className="Data">{item.note}</span></p>
-                    </p>
-                  ))
-                }
-              </ul>
+              <h3>Voici nos données</h3>
+              {items.length ? items.map(item => (
+                <p key={item.id}>
+                  <p>e-mail: <span className="Data">{item.email}</span> note: <span className="Data">{item.note}</span></p>
+                </p>
+              )) : <p className="Data">Il n'y a pas encore de données.</p>}
             </div>
 
           </div>
 
           <div className="App-search">
+            <h3>Cherchez une e-mail</h3>
             <Search />
           </div>
 
           <div className="App-calcul">
-            <p>
-              {
-                averages.map(average => (
-                  <p key={average.id}>
-                    <p>Note moyenne: <span className="Data">{average.avg}</span> </p>
-                  </p>
-                ))
-              }
-            </p>
+            <h3>Nos statistiques</h3>
+            {averages.length ? averages.map(average => (
+              <p key={average.id}>
+                <p>Note moyenne: <span className="Data">{average.avg}</span></p>
+              </p>
+            )) : <p className="Data">Il n'y a pas encore de note pour calculer la moyenne.</p>}
 
-            <p>
-              {
-                medians.map(median => (
-                  <p key={median.id}>
-                    <p>Utilisateur médian: <span className="Data">{median.email}</span> </p>
-                  </p>
-                ))
-              }
-            </p>
+            {medians.length ? medians.map(median => (
+              <p key={median.id}>
+                <p>Utilisateur médian: <span className="Data">{median.email}</span> Note médiane: <span className="Data">{median.note}</span> </p>
+              </p>
+            )) : <p className="Data">La médiane ne correspond à une e-mail (nombre paire d'e-mail)</p>}
           </div>
 
         </div>
